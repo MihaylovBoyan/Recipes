@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons :: head}"></head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="~{commons :: navbar}"></div>
+
+<div class="container" th:object="${recipe}">
+    <div class="recipe-details">
+        <!-- Recipe Image -->
+        <div class="recipe-image">
+            <img th:src="${recipe.imageUrl}" alt="Recipe Image">
+        </div>
+
+        <!-- Recipe Info -->
+        <div class="recipe-info">
+            <h2 th:text="${recipe.title}">Recipe Title</h2>
+
+            <div class="recipe-meta">
+                <span class="date-added">
+                    <strong>Date Added:</strong> <span th:text="*{created}"></span>
+                </span>
+            </div>
+            <div>
+        <span class="category"><strong>Category:</strong> <span th:text="${recipe.category}"></span>
+                </span>
+            </div>
+            <div>
+                <h3>Description</h3>
+                <p th:text="${recipe.description}" class="recipe-desc">
+                    This is where the recipe description goes. It should give a brief overview of the recipe.
+                </p>
+            </div>
+        </div>
+
+        <!-- Recipe Instructions -->
+        <div class="recipe-instructions">
+            <h3>Instructions</h3>
+            <p th:text="${recipe.instructions}">
+                Step-by-step instructions on how to make this recipe will go here.
+            </p>
+        </div>
+    </div>
+
+    <form th:action="@{/recipe/{id}(id=*{id})}" th:method="DELETE">
+        <button type="submit" class="btn btn-link">Delete</button>
+    </form>
+
+
+</div>
+
+</body>
+</html>

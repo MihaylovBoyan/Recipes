@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Last Food Blog</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg" th:fragment="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="#">The last <strong>food blog</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">All Recipes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Breakfast</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Lunch</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Dinner</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Meal Plans</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/recipes/add}">Add Recipe</a></li>
+            </ul>
+            <form class="d-flex ms-auto">
+                <input class="form-control me-2" type="search" placeholder="Search Recipes">
+            </form>
+            <button id="darkModeToggle" class="btn btn-secondary ms-3">🌙</button>
+        </div>
+    </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Dark Mode Toggle Script
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDarkMode ? '🌞' : '🌙'; // Change emoji on toggle
+    });
+</script>
+
+<footer th:fragment="footer">Test</footer>
+
+
+</body>
+</html>

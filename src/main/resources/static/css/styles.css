@@ -1,0 +1,322 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #f8f8f8; /* Light background */
+    padding: 15px 0;
+    border-bottom: 3px solid #ddd;
+}
+
+.navbar-brand {
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #222;
+}
+
+.navbar-nav {
+    margin-left: auto; /* Push menu items to the right */
+}
+
+.navbar-nav .nav-item {
+    padding: 0 10px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff5733;
+    text-decoration: underline;
+}
+
+/* Search Bar */
+.navbar input {
+    border: 2px solid #ddd;
+    padding: 6px 10px;
+    border-radius: 20px;
+}
+
+/* Latest Recipes Section */
+.container h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 3px solid #ff5733;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Recipe Cards */
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-body {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #ff5733;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #e64a19;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .navbar {
+    background-color: #444;
+    border-bottom: 3px solid #555;
+}
+
+.dark-mode .navbar-brand {
+    color: #fff;
+}
+
+.dark-mode .navbar-nav .nav-link {
+    color: #bbb;
+}
+
+.dark-mode .navbar-nav .nav-link:hover {
+    color: #ff5733;
+}
+
+.dark-mode .navbar input {
+    border: 2px solid #555;
+    background-color: #444;
+    color: #fff;
+}
+
+.dark-mode .container h2 {
+    color: #fff;
+    border-bottom: 3px solid #ff5733;
+}
+
+.dark-mode .card {
+    background-color: #444;
+    border: 1px solid #555;
+}
+
+.dark-mode .card-body {
+    background-color: #555;
+}
+
+.dark-mode .card-title {
+    color: #fff;
+}
+
+.dark-mode .card-text {
+    color: #ddd;
+}
+
+.dark-mode .btn-primary {
+    background-color: #ff5733;
+    border: none;
+}
+
+.dark-mode .btn-primary:hover {
+    background-color: #e64a19;
+}
+
+.dark-mode .footer {
+    background-color: #222;
+    color: #ddd;
+}
+
+#darkModeToggle{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Labels */
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+/* Form Inputs and Textareas */
+input[type="text"], input[type="url"], textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="url"]:focus, textarea:focus {
+    border-color: #ff5733;
+    outline: none;
+}
+
+/* Textarea Specific */
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+/* Invalid Input Styling */
+.is-invalid {
+    border-color: #e74c3c;
+    background-color: #f8d7da;
+}
+
+.is-invalid:focus {
+    border-color: #e74c3c;
+}
+
+/* Error Messages */
+.invalid-feedback {
+    display: block;
+    font-size: 14px;
+    color: #e74c3c;
+    margin-top: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #ff5733;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #e64a19;
+}
+
+.submit-btn:active {
+    background-color: #d43f00;
+}
+
+/* Spacing between form elements */
+.recipe-form {
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input[type="text"], input[type="url"], textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

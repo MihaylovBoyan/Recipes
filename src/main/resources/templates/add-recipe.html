@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons :: head}"></head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="~{commons :: navbar}"></div>
+
+<div class="container">
+    <h2>Add a New Recipe</h2>
+
+    <form th:action="@{/recipes/add}" th:method="post" th:object="${recipe}"
+          enctype="multipart/form-data" class="recipe-form">
+
+        <!--    <label for="title">Recipe Title:</label>-->
+        <!--    <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid"  max="10">-->
+        <!--    &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
+        <!--    <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger">-->
+        <!--      *{title.errors[0]}-->
+        <!--    </small>-->
+
+
+        <!--      <label for="title">Recipe Title:</label>-->
+        <!--      <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">-->
+
+        <!--      &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
+        <!--      <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger" >-->
+        <!--          &lt;!&ndash; Display the first error message for the title field &ndash;&gt;-->
+        <!--          <span th:text="${#fields.errors('title')[0]}"></span>-->
+        <!--      </small>-->
+
+
+        <label for="title">Recipe Title:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">
+
+        <!-- Display all errors for 'title' -->
+        <!--      <small th:errors="*{title}" class="invalid-feedback text-danger"></small>-->
+
+
+        <label th:for="description">Description:</label>
+        <textarea id="description" name="description" th:field="*{description}"
+                  th:errorclass="'is-invalid alert-danger'" required></textarea>
+        <small class="invalid-feedback text-danger">Error 2</small>
+
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients" required></textarea>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" required></textarea>
+
+        <label for="imageUrl">Image URL:</label>
+        <textarea id="imageUrl" name="imageUrl" required></textarea>
+
+        <!--    <label for="image">Recipe Image:</label>-->
+        <!--    <input type="file" id="image" name="image" accept="image/*" required>-->
+
+        <button type="submit" class="submit-btn">Submit Recipe</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{commons :: footer}"></div>
+
+</body>
+</html>
