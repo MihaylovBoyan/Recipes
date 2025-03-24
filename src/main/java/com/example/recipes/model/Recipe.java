@@ -2,7 +2,6 @@ package com.example.recipes.model;
 
 import jakarta.persistence.*;
 
-import javax.annotation.processing.Generated;
 import java.time.LocalDate;
 
 @Entity
@@ -29,6 +28,8 @@ public class Recipe {
 
     private LocalDate created;
 
+    @ManyToOne
+    private User createdBy;
 
     public Recipe() {
     }
@@ -93,6 +94,15 @@ public class Recipe {
 
     public Recipe setInstructions(String instructions) {
         this.instructions = instructions;
+        return this;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Recipe setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
         return this;
     }
 }
