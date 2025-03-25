@@ -3,6 +3,7 @@ package com.example.recipes.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,8 +25,14 @@ public class User {
     @Column
     private Long age;
 
+    @Column
+    private String fullName;
+
     @OneToMany(mappedBy = "createdBy")
     private List<Recipe> recipes;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
     }
@@ -81,6 +88,24 @@ public class User {
 
     public User setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+        return this;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public User setFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public User setRoles(Set<Role> roles) {
+        this.roles = roles;
         return this;
     }
 }
