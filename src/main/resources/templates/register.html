@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons :: head}"></head>
+<body class="bg-light">
+
+<div th:replace="~{commons :: navbar}"></div>
+
+<!-- Registration Form -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4 fw-bold">Create an Account</h2>
+        <form th:action="@{/users/register}" th:method="post" th:object="${userRegisterDTO}">
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" th:field="*{username}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}"></small>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" th:field="*{email}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}"></small>
+          </div>
+
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" th:field="*{fullName}" required>
+          </div>
+
+          <!-- Age -->
+          <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" th:field="*{age}" required min="1">
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" th:field="*{password}" required>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" th:field="*{confirmPassword}" required>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
