@@ -2,6 +2,7 @@ package com.example.recipes.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserRegisterDTO {
@@ -17,7 +18,7 @@ public class UserRegisterDTO {
     private String confirmPassword;
     @NotBlank
     private String fullName;
-    @Size(min = 10, max = 100)
+    @NotNull
     private Integer age;
 
     public UserRegisterDTO() {
