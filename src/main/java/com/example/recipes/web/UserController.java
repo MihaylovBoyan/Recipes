@@ -39,6 +39,7 @@ public class UserController {
             return "redirect:/register";
         }
 
+        userService.registerUser(userRegisterDTO);
         //todo register user
 
         return "redirect:/";
