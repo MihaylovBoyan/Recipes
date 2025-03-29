@@ -25,7 +25,7 @@ public class Config {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/users/register","/recipe/**", "/recipes/add", "/", "/css/**", "/js/**", "/images/**").permitAll() // Allow public access
+                        .requestMatchers( "/users/login", "/users/register","/recipe/**", "/recipes/add", "/", "/css/**", "/js/**", "/images/**").permitAll() // Allow public access
                         .anyRequest().authenticated() // Secure other endpoints
                 )
                 .formLogin(login -> login.disable()) // Disable login form
