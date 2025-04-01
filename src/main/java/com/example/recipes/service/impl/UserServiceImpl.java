@@ -3,6 +3,7 @@ package com.example.recipes.service.impl;
 import com.example.recipes.model.Role;
 import com.example.recipes.model.User;
 import com.example.recipes.model.UserRolesEnum;
+import com.example.recipes.model.dto.UserDetailsDTO;
 import com.example.recipes.model.dto.UserRegisterDTO;
 import com.example.recipes.repository.RoleRepository;
 import com.example.recipes.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -34,10 +36,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserRegisterDTO userRegisterDTO) {
-
         User mappedUser = mapToUser(userRegisterDTO);
         userRepository.save(mappedUser);
+    }
 
+    @Override
+    //todo
+    public UserDetailsDTO showUserDetailsById(Long id) {
+        Optional<User> byId = userRepository.findById(id);
+
+        return null;
     }
 
 
