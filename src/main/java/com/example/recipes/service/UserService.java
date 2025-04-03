@@ -7,4 +7,6 @@ public interface UserService {
     void registerUser(UserRegisterDTO userRegisterDTO);
 
     UserDetailsDTO showUserDetailsById(Long id);
+
+    boolean isEmailUnique(String email);
 }

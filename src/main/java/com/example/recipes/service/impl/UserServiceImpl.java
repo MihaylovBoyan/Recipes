@@ -43,9 +43,18 @@ public class UserServiceImpl implements UserService {
     @Override
     //todo
     public UserDetailsDTO showUserDetailsById(Long id) {
-        Optional<User> byId = userRepository.findById(id);
+       User userById = userRepository.findById(id).orElseThrow();
 
-        return null;
+      return modelMapper.map(userById, UserDetailsDTO.class);
+
+
+    }
+
+    @Override
+    public boolean isEmailUnique(String email) {
+
+
+        return !userRepository.existsByEmail(email);
     }
 
 
