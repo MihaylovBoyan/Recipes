@@ -47,4 +47,13 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
     }
+
+    @Override
+    public void updateById(Long id, RecipeDTO recipeDTO) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        //todo
+
+        recipeRepository.save(recipe);
+
+    }
 }

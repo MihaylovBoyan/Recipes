@@ -43,6 +43,11 @@
         </div>
     </div>
 
+    <form th:action="@{/recipe{id}(id=*{id})}" th:method="PATCH">
+        <button type="submit" class="btn btn-link">Update</button>
+
+    </form>
+
     <form th:action="@{/recipe/{id}(id=*{id})}" th:method="DELETE">
         <button type="submit" class="btn btn-link">Delete</button>
     </form>

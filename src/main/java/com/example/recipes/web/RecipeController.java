@@ -71,4 +71,12 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    @PatchMapping("/recipe/{id}")
+    public String update(@PathVariable Long id, RecipeDTO recipeDTO){
+
+        recipeService.updateById(id, recipeDTO);
+
+        return "redirect:/";
+    }
+
 }
