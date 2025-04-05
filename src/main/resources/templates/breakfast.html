@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{commons :: head}"></head>
+<body>
+<div th:replace="~{commons :: navbar}"></div>
+
+
+<div class="container mt-4">
+    <h2>Latest Recipes</h2>
+    <div class="row">
+        <div class="col-md-4" th:each="recipe : ${recipes}">
+            <div class="card">
+                <img th:src="${recipe.imageUrl}" class="card-img-top" alt="Recipe Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${recipe.title}"></h5>
+                    <p class="card-text" th:text="${recipe.description}"></p>
+                    <a th:href="@{/recipe/{id}(id=${recipe.id})}" class="btn btn-primary">View Recipe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

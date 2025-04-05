@@ -5,10 +5,12 @@ import com.example.recipes.model.Recipe;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
 import com.example.recipes.repository.RecipeRepository;
+import com.example.recipes.service.CategoryService;
 import com.example.recipes.service.RecipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +19,12 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final ModelMapper modelMapper;
     private final RecipeRepository recipeRepository;
+    private final CategoryService categoryService;
 
-    public RecipeServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, CategoryService categoryService) {
         this.modelMapper = modelMapper;
         this.recipeRepository = recipeRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -30,9 +34,11 @@ public class RecipeServiceImpl implements RecipeService {
 
     }
 
+
     @Override
     public void save(RecipeDTO recipeDTO) {
         Recipe recipe = modelMapper.map(recipeDTO, Recipe.class);
+        recipe.setCategory(categoryService.findByCategoryName(recipeDTO.getCategory()));
         recipeRepository.save(recipe);
 
     }
@@ -40,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDetailsDTO findById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-       return modelMapper.map(recipe, RecipeDetailsDTO.class);
+        return modelMapper.map(recipe, RecipeDetailsDTO.class);
 
     }
 
@@ -59,13 +65,26 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void findAllBreakfasts() {
+    public List<RecipeDTO> findAllBreakfasts(CategoryEnum breakfast) {
+        return getRecipeDTOS(breakfast);
+    }
 
+    @Override
+    public List<RecipeDTO> findAllLunches(CategoryEnum lunch) {
+        return getRecipeDTOS(lunch);
+    }
 
+    private List<RecipeDTO> getRecipeDTOS(CategoryEnum lunch) {
+        List<Recipe> byCategoryName = recipeRepository.findByCategoryName(lunch);
+        ArrayList<RecipeDTO> recipeDTOS = new ArrayList<>();
 
-        //todo
+        for (Recipe recipe : byCategoryName) {
+            RecipeDTO map = modelMapper.map(recipe, RecipeDTO.class);
+            map.setCategory(recipe.getCategory().getName());
+            recipeDTOS.add(map);
+        }
 
-
+        return recipeDTOS;
     }
 
 }

@@ -23,19 +23,13 @@ public class RecipeController {
 
     @GetMapping("/")
     public String index(Model model) {
-
         model.addAttribute("recipes", recipeService.findAllRecipes());
-
-
         return "index";
     }
 
-
     @GetMapping("/recipes/add")
     public String addRecipe(Model model) {
-
         model.addAttribute("categories", CategoryEnum.values());
-
         return "add-recipe";
     }
 
@@ -84,11 +78,14 @@ public class RecipeController {
 
     @GetMapping("/recipe/breakfast")
     public String showBreakfastsOnly(Model model) {
+        model.addAttribute("recipes", recipeService.findAllBreakfasts(CategoryEnum.BREAKFAST));
+        return "index";
+    }
 
-
-        recipeService.findAllBreakfasts();
-
-        return "breakfast";
+    @GetMapping("/recipe/lunch")
+    public String showLunchOnly(Model model) {
+        model.addAttribute("recipes", recipeService.findAllLunches(CategoryEnum.LUNCH));
+        return "index";
     }
 
 }

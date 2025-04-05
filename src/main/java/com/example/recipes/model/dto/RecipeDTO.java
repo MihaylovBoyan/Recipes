@@ -1,6 +1,7 @@
 package com.example.recipes.model.dto;
 
 
+import com.example.recipes.model.CategoryEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -27,7 +28,7 @@ public class RecipeDTO {
 
     private String imageUrl;
 
-    private String category;
+    private CategoryEnum category;
 
     public RecipeDTO() {
         this.created = LocalDate.now();
@@ -63,11 +64,11 @@ public class RecipeDTO {
         return this;
     }
 
-    public String getCategory() {
+    public CategoryEnum getCategory() {
         return category;
     }
 
-    public RecipeDTO setCategory(String category) {
+    public RecipeDTO setCategory(CategoryEnum category) {
         this.category = category;
         return this;
     }
