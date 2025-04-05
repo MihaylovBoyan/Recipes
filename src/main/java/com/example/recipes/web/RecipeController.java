@@ -79,4 +79,12 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    @GetMapping("/recipe/breakfast")
+    public String showBreakfastsOnly(){
+
+        recipeService.findAllBreakfasts();
+
+        return "breakfast";
+    }
+
 }

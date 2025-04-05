@@ -56,4 +56,14 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
 
     }
+
+    @Override
+    public void findAllBreakfasts() {
+
+
+
+        //todo
+
+
+    }
 }
