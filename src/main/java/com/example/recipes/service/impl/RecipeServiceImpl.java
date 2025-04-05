@@ -1,5 +1,6 @@
 package com.example.recipes.service.impl;
 
+import com.example.recipes.model.CategoryEnum;
 import com.example.recipes.model.Recipe;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
@@ -66,4 +67,5 @@ public class RecipeServiceImpl implements RecipeService {
 
 
     }
+
 }

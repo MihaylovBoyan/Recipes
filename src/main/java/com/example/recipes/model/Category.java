@@ -10,7 +10,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private CategoryEnum name;
 
     public Category() {}

@@ -1,5 +1,6 @@
 package com.example.recipes.service;
 
+import com.example.recipes.model.CategoryEnum;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
 
@@ -17,4 +18,5 @@ public interface RecipeService {
     void updateById(Long id, RecipeDTO recipeDTO);
 
     void findAllBreakfasts();
+
 }

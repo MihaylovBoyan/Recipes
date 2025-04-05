@@ -1,5 +1,6 @@
 package com.example.recipes.web;
 
+import com.example.recipes.model.CategoryEnum;
 import com.example.recipes.model.Recipe;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
@@ -31,20 +32,22 @@ public class RecipeController {
 
 
     @GetMapping("/recipes/add")
-    public String addRecipe(){
+    public String addRecipe(Model model) {
 
-    return "add-recipe";
+        model.addAttribute("categories", CategoryEnum.values());
+
+        return "add-recipe";
     }
 
     @ModelAttribute(name = "recipe")
-    public RecipeDTO recipeDTO(){
+    public RecipeDTO recipeDTO() {
         return new RecipeDTO();
     }
 
     @PostMapping("/recipes/add")
-    public String doAddRecipe(@Valid RecipeDTO recipeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String doAddRecipe(@Valid RecipeDTO recipeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("recipe", recipeDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipe", bindingResult);
@@ -57,7 +60,7 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/{id}")
-    private String recipeDetails(@PathVariable("id") Long id, Model model){
+    private String recipeDetails(@PathVariable("id") Long id, Model model) {
         RecipeDetailsDTO byId = recipeService.findById(id);
         System.out.println(byId.getId());
         model.addAttribute("recipe", recipeService.findById(id));
@@ -66,13 +69,13 @@ public class RecipeController {
     }
 
     @DeleteMapping("/recipe/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         recipeService.deleteById(id);
         return "redirect:/";
     }
 
     @PatchMapping("/recipe/{id}")
-    public String update(@PathVariable Long id, RecipeDTO recipeDTO){
+    public String update(@PathVariable Long id, RecipeDTO recipeDTO) {
 
         recipeService.updateById(id, recipeDTO);
 
@@ -80,7 +83,8 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/breakfast")
-    public String showBreakfastsOnly(){
+    public String showBreakfastsOnly(Model model) {
+
 
         recipeService.findAllBreakfasts();
 

@@ -24,7 +24,8 @@ public class Recipe {
     @Column(columnDefinition = "LONGTEXT")
     private String instructions;
 
-    private String category;
+    @ManyToOne
+    private Category category;
 
     private LocalDate created;
 
@@ -70,11 +71,11 @@ public class Recipe {
         return this;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public Recipe setCategory(String category) {
+    public Recipe setCategory(Category category) {
         this.category = category;
         return this;
     }

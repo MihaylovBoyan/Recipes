@@ -1,14 +1,9 @@
 package com.example.recipes.repository;
 
-import com.example.recipes.model.Recipe;
+import com.example.recipes.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-
-//    List<Recipe> findBy
-//
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }

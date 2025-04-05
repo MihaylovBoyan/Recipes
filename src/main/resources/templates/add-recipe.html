@@ -33,6 +33,16 @@
         <label for="title">Recipe Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">
 
+
+        <label th:for="category">Category:</label>
+        <select id="category" class="form-control">
+            <option value="" disabled selected>Select category</option>
+            <option th:each="cat : ${categories}"
+                    th:value="${cat}"
+                    th:text="${cat}"></option>
+        </select>
+
+
         <!-- Display all errors for 'title' -->
         <!--      <small th:errors="*{title}" class="invalid-feedback text-danger"></small>-->
 
