@@ -76,6 +76,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    //todo refactor this code
     @GetMapping("/recipe/breakfast")
     public String showBreakfastsOnly(Model model) {
         model.addAttribute("recipes", recipeService.findAllBreakfasts(CategoryEnum.BREAKFAST));
@@ -85,6 +86,12 @@ public class RecipeController {
     @GetMapping("/recipe/lunch")
     public String showLunchOnly(Model model) {
         model.addAttribute("recipes", recipeService.findAllLunches(CategoryEnum.LUNCH));
+        return "index";
+    }
+
+    @GetMapping("/recipe/dinner")
+    public String showDinnerOnly(Model model) {
+        model.addAttribute("recipes", recipeService.findAllLunches(CategoryEnum.DINNER));
         return "index";
     }
 
