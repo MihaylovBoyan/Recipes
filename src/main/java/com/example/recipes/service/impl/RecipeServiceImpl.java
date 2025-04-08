@@ -29,9 +29,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<RecipeDTO> findAllRecipes() {
-
         return recipeRepository.findAll().stream().map(r -> modelMapper.map(r, RecipeDTO.class)).collect(Collectors.toList());
-
     }
 
 
@@ -40,14 +38,12 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe recipe = modelMapper.map(recipeDTO, Recipe.class);
         recipe.setCategory(categoryService.findByCategoryName(recipeDTO.getCategory()));
         recipeRepository.save(recipe);
-
     }
 
     @Override
     public RecipeDetailsDTO findById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         return modelMapper.map(recipe, RecipeDetailsDTO.class);
-
     }
 
     @Override
