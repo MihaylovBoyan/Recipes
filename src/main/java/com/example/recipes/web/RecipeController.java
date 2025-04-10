@@ -25,12 +25,6 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("recipes", recipeService.findAllRecipes());
-        return "index";
-    }
-
     @GetMapping("/recipes/add")
     public String addRecipe(Model model) {
         model.addAttribute("categories", CategoryEnum.values());

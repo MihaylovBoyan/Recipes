@@ -12,24 +12,6 @@
     <form th:action="@{/recipes/add}" th:method="post" th:object="${recipe}"
           enctype="multipart/form-data" class="recipe-form">
 
-        <!--    <label for="title">Recipe Title:</label>-->
-        <!--    <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid"  max="10">-->
-        <!--    &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
-        <!--    <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger">-->
-        <!--      *{title.errors[0]}-->
-        <!--    </small>-->
-
-
-        <!--      <label for="title">Recipe Title:</label>-->
-        <!--      <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">-->
-
-        <!--      &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
-        <!--      <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger" >-->
-        <!--          &lt;!&ndash; Display the first error message for the title field &ndash;&gt;-->
-        <!--          <span th:text="${#fields.errors('title')[0]}"></span>-->
-        <!--      </small>-->
-
-
         <label for="title">Recipe Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">
 
@@ -41,11 +23,6 @@
                     th:value="${cat}"
                     th:text="${cat}"></option>
         </select>
-
-
-        <!-- Display all errors for 'title' -->
-        <!--      <small th:errors="*{title}" class="invalid-feedback text-danger"></small>-->
-
 
         <label th:for="description">Description:</label>
         <input type="text" id="description" name="description" th:field="*{description}"
@@ -60,9 +37,6 @@
 
         <label for="imageUrl">Image URL:</label>
         <input type="text" id="imageUrl" name="imageUrl" required>
-
-        <!--    <label for="image">Recipe Image:</label>-->
-        <!--    <input type="file" id="image" name="image" accept="image/*" required>-->
 
         <button type="submit" class="submit-btn">Submit Recipe</button>
     </form>
