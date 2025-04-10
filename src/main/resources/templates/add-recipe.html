@@ -48,18 +48,18 @@
 
 
         <label th:for="description">Description:</label>
-        <textarea id="description" name="description" th:field="*{description}"
+        <input type="text" id="description" name="description" th:field="*{description}"
                   th:errorclass="'is-invalid alert-danger'" required></textarea>
         <small class="invalid-feedback text-danger">Error 2</small>
 
         <label for="ingredients">Ingredients:</label>
-        <textarea id="ingredients" name="ingredients" required></textarea>
+        <input type="text" id="ingredients" name="ingredients" required>
 
         <label for="instructions">Instructions:</label>
-        <textarea id="instructions" name="instructions" required></textarea>
+        <input type="text" id="instructions" name="instructions" required>
 
         <label for="imageUrl">Image URL:</label>
-        <textarea id="imageUrl" name="imageUrl" required></textarea>
+        <input type="text" id="imageUrl" name="imageUrl" required>
 
         <!--    <label for="image">Recipe Image:</label>-->
         <!--    <input type="file" id="image" name="image" accept="image/*" required>-->
@@ -68,9 +68,6 @@
     </form>
 </div>
 
-<!-- Footer -->
-
-
 </body>
-<div th:replace="~{commons :: footer}"></div>
+
 </html>

@@ -159,15 +159,6 @@ body {
     background-color: #e64a19;
 }
 
-/* Footer */
-/*.footer {*/
-/*    text-align: center;*/
-/*    padding: 20px;*/
-/*    background-color: #333;*/
-/*    color: #fff;*/
-/*    font-size: 14px;*/
-/*    margin-top: 40px;*/
-/*}*/
 
 .footer {
     text-align: center;
@@ -175,7 +166,7 @@ body {
     background-color: #333;
     color: #fff;
     font-size: 14px;
-    margin-top: auto; /* Ensures footer stays at the bottom */
+    margin-top: auto;
 }
 
 body.dark-mode {
