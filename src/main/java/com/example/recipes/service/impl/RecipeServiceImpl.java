@@ -47,7 +47,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDetailsDTO findById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-        return modelMapper.map(recipe, RecipeDetailsDTO.class);
+        RecipeDetailsDTO recipeDetailsDTO = modelMapper.map(recipe, RecipeDetailsDTO.class);
+        recipeDetailsDTO.setCategory(recipe.getCategory().getName().name());
+        recipeDetailsDTO.setImageUrl(recipe.getImageUrl());
+        return recipeDetailsDTO;
     }
 
     @Override
@@ -72,7 +75,15 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipeDTO.getTitle() != null) {
             recipe.setTitle(recipeDTO.getTitle());
         }
-        
+
+        if (recipeDTO.getDescription() != null) {
+            recipe.setDescription(recipeDTO.getDescription());
+        }
+
+        if (recipeDTO.getCategory() != null) {
+            recipe.setCategory(categoryService.findByCategoryName(recipeDTO.getCategory()));
+        }
+
         recipeRepository.save(recipe);
 
     }

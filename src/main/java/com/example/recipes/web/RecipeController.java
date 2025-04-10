@@ -70,14 +70,22 @@ public class RecipeController {
     }
 
     @GetMapping("/recipe/update/{id}")
-        public String update(@PathVariable Long id, Model model){
+    public String update(@PathVariable Long id, Model model) {
         RecipeDetailsDTO byId = recipeService.findById(id);
+
         model.addAttribute("recipe", recipeService.findById(id));
+        model.addAttribute("categories", CategoryEnum.values());
 
-            return "update";
-        }
+        return "update";
+    }
 
+    @PatchMapping("/recipe/update/{id}")
+    public String update(@PathVariable Long id, @ModelAttribute("recipe") RecipeDTO recipeDTO) {
 
+        recipeService.updateById(id, recipeDTO);
+
+        return "redirect:/";
+    }
 
 
     @DeleteMapping("/recipe/details/{id}")
@@ -86,13 +94,6 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    @PatchMapping("/recipe/details/{id}")
-    public String update(@PathVariable Long id, RecipeDTO recipeDTO) {
-
-        recipeService.updateById(id, recipeDTO);
-
-        return "redirect:/";
-    }
 
     @GetMapping("/recipe/{category}")
     public String showRecipesByCategory(@PathVariable String category, Model model) {
