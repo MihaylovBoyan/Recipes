@@ -47,6 +47,34 @@ body {
     color: #ff5733 !important;
 }
 
+/*profile*/
+
+.profile-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+}
+
+.profile-icon-link:hover .profile-icon {
+    transform: scale(1.05);
+}
+
+.search-input {
+    border-radius: 20px;
+    border: 2px solid #ff5733;
+    padding-left: 16px;
+    padding-right: 16px;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 3px rgba(255, 87, 51, 0.2);
+    border-color: #ff5733;
+}
+
+
 /* Dark Mode Button */
 #darkModeToggle {
     border-radius: 12px;

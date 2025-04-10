@@ -13,56 +13,52 @@
 
 
 <!-- navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3" th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
     <div class="container">
+        <!-- Logo -->
         <a class="navbar-brand fw-bold text-primary" th:href="@{/}">Food Recipes</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Toggler for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Main Menu -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" th:href="@{/}">All Recipes</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/breakfast}"
-                                        th:classappend="${currentCategory == 'BREAKFAST'} ? 'active'">Breakfast</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/lunch}"
-                                        th:classappend="${currentCategory == 'LUNCH'} ? 'active'">Lunch</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/dinner}"
-                                        th:classappend="${currentCategory == 'DINNER'} ? 'active'">Dinner</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/}">All Recipes</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/breakfast}">Breakfast</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/lunch}">Lunch</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/recipe/dinner}">Dinner</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Meal Plans</a></li>
-                <th:block sec:authorize="isAuthenticated()">
-                    <li class="nav-item"><a class="nav-link text-success fw-semibold" th:href="@{/recipes/add}">+ Add
-                        Recipe</a></li>
-                </th:block>
-                <th:block sec:authorize="!isAuthenticated()">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/users/login}">Login</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/users/register}">Register</a></li>
-                </th:block>
-
-                <th:block sec:authorize="hasRole('ADMIN')">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/users/admin}">Admin</a></li>
-                </th:block>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" th:href="@{/recipes/add}">+ Add Recipe</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
-                </ul>
-
-                <th:block sec:authorize="isAuthenticated()">
-                    <form th:method="POST"
-                          th:action="@{/users/logout}">
-                        <input class="nav-link" type="submit" value="Logout"/>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:method="POST" th:action="@{/users/logout}" style="display: inline;">
+                        <input type="submit" value="Logout" class="nav-link btn btn-link p-0" style="text-decoration: none;"/>
                     </form>
-                </th:block>
-
+                </li>
             </ul>
 
-            <form class="d-flex me-3">
-                <input class="form-control me-2" type="search" placeholder="Search Recipes">
-            </form>
+            <!-- Profile Icon + Search -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Profile Icon -->
+                <a th:href="@{/profile}" class="profile-icon-link">
+                    <img src="/images/user-icon.svg" alt="Profile" class="profile-icon">
+                </a>
 
-            <button id="darkModeToggle" class="btn btn-outline-secondary">🌙</button>
+                <!-- Search -->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 search-input" type="search" placeholder="Search Recipes"
+                           aria-label="Search">
+                </form>
+
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary ms-2">🌙</button>
+            </div>
         </div>
     </div>
 </nav>
