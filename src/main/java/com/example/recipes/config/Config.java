@@ -21,18 +21,20 @@ public class Config {
         return new ModelMapper();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers( "/users/login", "/users/register","/recipe/**", "/recipes/add", "/", "/css/**", "/js/**", "/images/**").permitAll() // Allow public access
-                        .anyRequest().authenticated() // Secure other endpoints
-                )
-                .formLogin(login -> login.disable()) // Disable login form
-                .httpBasic(basic -> basic.disable()) // Disable basic authentication
-                .csrf(csrf -> csrf.disable()); // Disable CSRF for development
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers( "/users/login", "/users/register","/recipe/**", "/recipes/add", "/", "/css/**", "/js/**", "/images/**").permitAll() // Allow public access
+//                        .anyRequest().authenticated() // Secure other endpoints
+//                )
+//                .formLogin(login -> login.disable()) // Disable login form
+//                .httpBasic(basic -> basic.disable()) // Disable basic authentication
+//                .csrf(csrf -> csrf.disable()); // Disable CSRF for development
+//
+//        return http.build();
+//    }
 
-        return http.build();
-    }
+
 
 }

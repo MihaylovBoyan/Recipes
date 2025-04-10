@@ -2,15 +2,19 @@ package com.example.recipes.web;
 
 import com.example.recipes.model.CategoryEnum;
 import com.example.recipes.model.Recipe;
+import com.example.recipes.model.RecipeUserDetails;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
 import com.example.recipes.service.RecipeService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class RecipeController {
@@ -39,7 +43,10 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/add")
-    public String doAddRecipe(@Valid RecipeDTO recipeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String doAddRecipe(@Valid RecipeDTO recipeDTO,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes,
+                              @AuthenticationPrincipal RecipeUserDetails currentUser) {
 
         if (bindingResult.hasErrors()) {
 
@@ -47,13 +54,13 @@ public class RecipeController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipe", bindingResult);
             return "redirect:/recipes/add";
         }
-
+        recipeDTO.setCreatedBy(currentUser.getUsername());
         recipeService.save(recipeDTO);
 
         return "redirect:/";
     }
 
-    @GetMapping("/recipe/{id}")
+    @GetMapping("/recipe/details/{id}")
     private String recipeDetails(@PathVariable("id") Long id, Model model) {
         RecipeDetailsDTO byId = recipeService.findById(id);
         System.out.println(byId.getId());
@@ -62,13 +69,24 @@ public class RecipeController {
         return "details";
     }
 
-    @DeleteMapping("/recipe/{id}")
+    @GetMapping("/recipe/update/{id}")
+        public String update(@PathVariable Long id, Model model){
+        RecipeDetailsDTO byId = recipeService.findById(id);
+        model.addAttribute("recipe", recipeService.findById(id));
+
+            return "update";
+        }
+
+
+
+
+    @DeleteMapping("/recipe/details/{id}")
     public String delete(@PathVariable Long id) {
         recipeService.deleteById(id);
         return "redirect:/";
     }
 
-    @PatchMapping("/recipe/{id}")
+    @PatchMapping("/recipe/details/{id}")
     public String update(@PathVariable Long id, RecipeDTO recipeDTO) {
 
         recipeService.updateById(id, recipeDTO);
@@ -76,23 +94,16 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    //todo refactor this code
-    @GetMapping("/recipe/breakfast")
-    public String showBreakfastsOnly(Model model) {
-        model.addAttribute("recipes", recipeService.findAllBreakfasts(CategoryEnum.BREAKFAST));
-        return "index";
-    }
+    @GetMapping("/recipe/{category}")
+    public String showRecipesByCategory(@PathVariable String category, Model model) {
+        return CategoryEnum.from(category)
+                .map(c -> {
+                    List<RecipeDTO> recipes = recipeService.findAllByCategory(c);
+                    model.addAttribute("recipes", recipes);
+                    model.addAttribute("currentCategory", c.name());
+                    return "index";
+                })
+                .orElse("error/404");
 
-    @GetMapping("/recipe/lunch")
-    public String showLunchOnly(Model model) {
-        model.addAttribute("recipes", recipeService.findAllLunches(CategoryEnum.LUNCH));
-        return "index";
     }
-
-    @GetMapping("/recipe/dinner")
-    public String showDinnerOnly(Model model) {
-        model.addAttribute("recipes", recipeService.findAllLunches(CategoryEnum.DINNER));
-        return "index";
-    }
-
 }

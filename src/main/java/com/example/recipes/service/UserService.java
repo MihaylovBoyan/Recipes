@@ -1,5 +1,6 @@
 package com.example.recipes.service;
 
+import com.example.recipes.model.User;
 import com.example.recipes.model.dto.UserDetailsDTO;
 import com.example.recipes.model.dto.UserRegisterDTO;
 
@@ -9,4 +10,6 @@ public interface UserService {
     UserDetailsDTO showUserDetailsById(Long id);
 
     boolean isEmailUnique(String email);
+
+    User findByUsername(String createdBy);
 }

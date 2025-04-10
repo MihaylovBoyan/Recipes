@@ -9,26 +9,8 @@
 <div class="container">
     <h2>Add a New Recipe</h2>
 
-    <form th:action="@{/recipes/add}" th:method="post" th:object="${recipe}"
+    <form th:action="@{/recipes/update/{id}(id=*{id})}" th:method="PATCH" th:object="${recipe}"
           enctype="multipart/form-data" class="recipe-form">
-
-        <!--    <label for="title">Recipe Title:</label>-->
-        <!--    <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid"  max="10">-->
-        <!--    &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
-        <!--    <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger">-->
-        <!--      *{title.errors[0]}-->
-        <!--    </small>-->
-
-
-        <!--      <label for="title">Recipe Title:</label>-->
-        <!--      <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">-->
-
-        <!--      &lt;!&ndash; Error message conditionally shown if there is an error on 'title' &ndash;&gt;-->
-        <!--      <small th:if="${#fields.hasErrors('title')}"  class="invalid-feedback text-danger" >-->
-        <!--          &lt;!&ndash; Display the first error message for the title field &ndash;&gt;-->
-        <!--          <span th:text="${#fields.errors('title')[0]}"></span>-->
-        <!--      </small>-->
-
 
         <label for="title">Recipe Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">

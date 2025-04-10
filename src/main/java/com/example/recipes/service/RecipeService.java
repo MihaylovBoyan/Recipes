@@ -18,7 +18,5 @@ public interface RecipeService {
 
     void updateById(Long id, RecipeDTO recipeDTO);
 
-    List<RecipeDTO> findAllBreakfasts(CategoryEnum breakfast);
-
-    List<RecipeDTO> findAllLunches(CategoryEnum lunch);
+    List<RecipeDTO> findAllByCategory(CategoryEnum categoryEnum);
 }

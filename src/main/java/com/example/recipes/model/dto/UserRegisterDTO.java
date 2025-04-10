@@ -11,13 +11,21 @@ public class UserRegisterDTO {
 
     @NotBlank
     private String username;
+
     @Email
     private String email;
+
     @NotBlank
     private String password;
+
     private String confirmPassword;
+
     @NotBlank
-    private String fullName;
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
     @NotNull
     private Integer age;
 
@@ -60,12 +68,21 @@ public class UserRegisterDTO {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public UserRegisterDTO setFullName(String fullName) {
-        this.fullName = fullName;
+    public UserRegisterDTO setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserRegisterDTO setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 

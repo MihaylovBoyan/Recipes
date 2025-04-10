@@ -7,6 +7,7 @@ import com.example.recipes.model.dto.RecipeDetailsDTO;
 import com.example.recipes.repository.RecipeRepository;
 import com.example.recipes.service.CategoryService;
 import com.example.recipes.service.RecipeService;
+import com.example.recipes.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,13 @@ public class RecipeServiceImpl implements RecipeService {
     private final ModelMapper modelMapper;
     private final RecipeRepository recipeRepository;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public RecipeServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, CategoryService categoryService) {
+    public RecipeServiceImpl(ModelMapper modelMapper, RecipeRepository recipeRepository, CategoryService categoryService, UserService userService) {
         this.modelMapper = modelMapper;
         this.recipeRepository = recipeRepository;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @Override
@@ -37,6 +40,7 @@ public class RecipeServiceImpl implements RecipeService {
     public void save(RecipeDTO recipeDTO) {
         Recipe recipe = modelMapper.map(recipeDTO, Recipe.class);
         recipe.setCategory(categoryService.findByCategoryName(recipeDTO.getCategory()));
+        recipe.setCreatedBy(userService.findByUsername(recipeDTO.getCreatedBy()));
         recipeRepository.save(recipe);
     }
 
@@ -54,21 +58,33 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void updateById(Long id, RecipeDTO recipeDTO) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-        //todo
 
+        if (recipeDTO.getTitle() != null) {
+            recipe.setTitle(recipeDTO.getTitle());
+        }
+
+        if (recipeDTO.getImageUrl() != null) {
+            recipe.setImageUrl(recipeDTO.getImageUrl());
+        }
+        if (recipeDTO.getInstructions() != null) {
+            recipe.setInstructions(recipeDTO.getInstructions());
+        }
+        if (recipeDTO.getTitle() != null) {
+            recipe.setTitle(recipeDTO.getTitle());
+        }
+        
         recipeRepository.save(recipe);
 
     }
 
     @Override
-    public List<RecipeDTO> findAllBreakfasts(CategoryEnum breakfast) {
-        return getRecipeDTOS(breakfast);
+    public List<RecipeDTO> findAllByCategory(CategoryEnum category) {
+        return getRecipeDTOS(category)
+                .stream()
+                .map(recipe -> modelMapper.map(recipe, RecipeDTO.class))
+                .toList();
     }
 
-    @Override
-    public List<RecipeDTO> findAllLunches(CategoryEnum lunch) {
-        return getRecipeDTOS(lunch);
-    }
 
     private List<RecipeDTO> getRecipeDTOS(CategoryEnum lunch) {
         List<Recipe> byCategoryName = recipeRepository.findByCategoryName(lunch);

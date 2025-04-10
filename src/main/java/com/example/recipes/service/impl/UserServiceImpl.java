@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,18 +44,18 @@ public class UserServiceImpl implements UserService {
     @Override
     //todo
     public UserDetailsDTO showUserDetailsById(Long id) {
-       User userById = userRepository.findById(id).orElseThrow();
-
-      return modelMapper.map(userById, UserDetailsDTO.class);
-
-
+        User userById = userRepository.findById(id).orElseThrow();
+        return modelMapper.map(userById, UserDetailsDTO.class);
     }
 
     @Override
     public boolean isEmailUnique(String email) {
-
-
         return !userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public User findByUsername(String createdBy) {
+        return userRepository.findByUsername(createdBy).orElseThrow();
     }
 
 
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("Role USER not found"));
         User mappedUser = modelMapper.map(userRegisterDTO, User.class);
         mappedUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
-        mappedUser.setRoles(Set.of(role));
+        mappedUser.setRoles(List.of(role));
 
         return mappedUser;
     }

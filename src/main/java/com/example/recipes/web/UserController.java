@@ -40,7 +40,7 @@ public class UserController {
 
         userService.registerUser(userRegisterDTO);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @ModelAttribute("userRegisterDTO")

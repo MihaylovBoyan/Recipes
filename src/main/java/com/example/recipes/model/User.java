@@ -28,17 +28,20 @@ public class User {
     private Long age;
 
     @Column
-    private String fullName;
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     @OneToMany(mappedBy = "createdBy")
     private List<Recipe> recipes;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User() {
         this.recipes = new ArrayList<>();
-        this.roles = new HashSet<>();
+        this.roles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -95,20 +98,29 @@ public class User {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User setFullName(String fullName) {
-        this.fullName = fullName;
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
-    public Set<Role> getRoles() {
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public User setRoles(Set<Role> roles) {
+    public User setRoles(List<Role> roles) {
         this.roles = roles;
         return this;
     }

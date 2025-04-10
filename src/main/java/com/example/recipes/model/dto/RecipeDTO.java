@@ -30,11 +30,11 @@ public class RecipeDTO {
 
     private CategoryEnum category;
 
+    private String createdBy;
+
     public RecipeDTO() {
         this.created = LocalDate.now();
     }
-
-
 
 
     public String getTitle() {
@@ -97,6 +97,15 @@ public class RecipeDTO {
 
     public RecipeDTO setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public RecipeDTO setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
         return this;
     }
 }

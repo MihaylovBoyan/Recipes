@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe.title}"></h5>
                     <p class="card-text" th:text="${recipe.description}"></p>
-                    <a th:href="@{/recipe/{id}(id=${recipe.id})}" class="btn btn-primary">View Recipe</a>
+                    <a th:href="@{/recipe/details/{id}(id=${recipe.id})}" class="btn btn-primary">View Recipe</a>
                 </div>
             </div>
         </div>

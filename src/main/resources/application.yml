@@ -16,9 +16,9 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/recipes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/recipes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
 logging:
   level:
     org:
@@ -31,3 +31,7 @@ logging:
 server:
   port: 8080
 
+  logging:
+    level:
+      root: DEBUG
+      org.springframework.core.env: DEBUG
