@@ -58,7 +58,7 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public String details(@PathVariable Long id, Model model){
 
-      UserDetailsDTO userDetailsDTO =  userService.showUserDetailsById(id);
+      model.addAttribute("userDetailsDTO", userService.showUserDetailsById(id));
 
         return "profile";
     }

@@ -8,13 +8,17 @@ public class UserDetailsDTO {
 
     private Long id;
 
-    private String fullName;
+    private String firstName;
+
+    private String lastName;
 
     private String username;
 
-    private Integer age;
+    private Long age;
 
     private String level;
+
+    private String email;
 
     private List<Recipe> recipes;
 
@@ -30,12 +34,21 @@ public class UserDetailsDTO {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public UserDetailsDTO setFullName(String fullName) {
-        this.fullName = fullName;
+    public UserDetailsDTO setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserDetailsDTO setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
@@ -48,11 +61,11 @@ public class UserDetailsDTO {
         return this;
     }
 
-    public Integer getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public UserDetailsDTO setAge(Integer age) {
+    public UserDetailsDTO setAge(Long age) {
         this.age = age;
         return this;
     }
@@ -72,6 +85,15 @@ public class UserDetailsDTO {
 
     public UserDetailsDTO setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserDetailsDTO setEmail(String email) {
+        this.email = email;
         return this;
     }
 }

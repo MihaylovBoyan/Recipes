@@ -12,4 +12,6 @@ public interface UserService {
     boolean isEmailUnique(String email);
 
     User findByUsername(String createdBy);
+
+    UserDetailsDTO showUserDetailsByUsername(String username);
 }

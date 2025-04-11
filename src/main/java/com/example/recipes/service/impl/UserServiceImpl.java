@@ -12,6 +12,7 @@ import com.example.recipes.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +42,8 @@ public class UserServiceImpl implements UserService {
         userRepository.save(mappedUser);
     }
 
+    @Transactional
     @Override
-    //todo
     public UserDetailsDTO showUserDetailsById(Long id) {
         User userById = userRepository.findById(id).orElseThrow();
         return modelMapper.map(userById, UserDetailsDTO.class);
@@ -56,6 +57,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String createdBy) {
         return userRepository.findByUsername(createdBy).orElseThrow();
+    }
+
+    @Override
+    //todo finish it!
+    public UserDetailsDTO showUserDetailsByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+       return new UserDetailsDTO()
+               .setAge(user.getAge())
+               .setEmail(user.getEmail())
+               .setUsername(user.getUsername())
+               .setId(user.getId());
     }
 
 

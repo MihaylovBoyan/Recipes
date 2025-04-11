@@ -36,6 +36,10 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/recipes/add}">+ Add Recipe</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
+                <th:block sec:authorize="!isAuthenticated()">
+                <li class="nav-item"><a class="nav-link" th:href="@{/users/login}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/users/register}">Register</a></li>
+                </th:block>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <form th:method="POST" th:action="@{/users/logout}" style="display: inline;">
                         <input type="submit" value="Logout" class="nav-link btn btn-link p-0" style="text-decoration: none;"/>
@@ -46,10 +50,22 @@
             <!-- Profile Icon + Search -->
             <div class="d-flex align-items-center gap-2">
                 <!-- Profile Icon -->
-                <a th:href="@{/profile}" class="profile-icon-link">
-                    <img src="/images/user-icon.svg" alt="Profile" class="profile-icon">
-                </a>
 
+                <li th:if="${userDetailsDTO != null}">
+                    <a th:href="@{/users/profile/{id}(id=${userDetailsDTO.id})}" class="profile-icon-link">
+                        <img src="/images/user-icon.svg" alt="Profile" class="profile-icon">
+                    </a>
+                </li>
+
+<!--                <li th:if="${userDetailsDTO != null}">-->
+<!--                    <a th:href="@{/users/profile/{id}(id=${userDetailsDTO.id})}" class="profile-icon-link">-->
+<!--                        <img src="/images/user-icon.svg" alt="Profile" class="profile-icon">Profile</a>-->
+<!--                </li>-->
+<!--                <th:block sec:authorize="isAuthenticated()">-->
+<!--                <a th:href="@{/profile/{id}(id=${userDetailsDTO.id})}" class="profile-icon-link">-->
+<!--                    <img src="/images/user-icon.svg" alt="Profile" class="profile-icon">-->
+<!--                </a>-->
+<!--                </th:block>-->
                 <!-- Search -->
                 <form class="d-flex" role="search">
                     <input class="form-control me-2 search-input" type="search" placeholder="Search Recipes"
