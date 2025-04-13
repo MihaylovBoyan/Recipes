@@ -1,6 +1,7 @@
 package com.example.recipes.web;
 
 import com.example.recipes.model.dto.UserDetailsDTO;
+import com.example.recipes.model.dto.UserLoginDTO;
 import com.example.recipes.model.dto.UserRegisterDTO;
 import com.example.recipes.service.UserService;
 import jakarta.validation.Valid;
@@ -25,22 +26,18 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/register")
     public String registerUser() {
-
         return "register";
     }
-
 
     @PostMapping("/register")
     public String doRegisterUser(@Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-
             redirectAttributes.addFlashAttribute("userRegisterDTO", userRegisterDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
 
-            return "redirect:/register";
+            return "redirect:register";
         }
 
         userService.registerUser(userRegisterDTO);
@@ -55,7 +52,18 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        if (!model.containsAttribute("userLoginDTO")) {
+            model.addAttribute("userLoginDTO", new UserLoginDTO());
+        }
+        return "login";
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+
+        model.addAttribute("loginError", true);
+        model.addAttribute("userLoginDTO", new UserLoginDTO());
         return "login";
     }
 

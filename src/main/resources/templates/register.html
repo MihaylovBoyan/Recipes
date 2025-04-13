@@ -32,29 +32,39 @@
           <div class="mb-3">
             <label class="form-label">First Name</label>
             <input type="text" class="form-control" th:field="*{firstName}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('firstName')}"
+                   th:errors="*{firstName}"></small>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Last Name</label>
             <input type="text" class="form-control" th:field="*{lastName}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('lastName')}"
+                   th:errors="*{lastName}"></small>
           </div>
 
           <!-- Age -->
           <div class="mb-3">
             <label class="form-label">Age</label>
             <input type="number" class="form-control" th:field="*{age}" required min="1">
+            <small class="text-danger" th:if="${#fields.hasErrors('age')}"
+                   th:errors="*{age}"></small>
           </div>
 
           <!-- Password -->
           <div class="mb-3">
             <label class="form-label">Password</label>
             <input type="password" class="form-control" th:field="*{password}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('password')}"
+                   th:errors="*{password}"></small>
           </div>
 
           <!-- Confirm Password -->
           <div class="mb-3">
             <label class="form-label">Confirm Password</label>
             <input type="password" class="form-control" th:field="*{confirmPassword}" required>
+            <small class="text-danger" th:if="${#fields.hasErrors('confirmPassword')}"
+                   th:errors="*{confirmPassword}"></small>
           </div>
 
           <!-- Submit Button -->

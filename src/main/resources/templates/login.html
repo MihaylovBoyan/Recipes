@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{commons :: head}"></head>
-<body class="bg-light">
-
+<body class="d-flex flex-column min-vh-100 bg-light">
 <div th:replace="~{commons :: navbar}"></div>
 
-
-<!-- Login Form -->
-<div class="container mt-5">
+<div class="container my-5 flex-grow-1">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-lg p-4">
                 <h2 class="text-center mb-4 fw-bold">Login</h2>
-                <form th:action="@{/users/login}" th:method="post" th:object="${userRegisterDTO}">
+                <form th:action="@{/users/login}" th:method="post" th:object="${userLoginDTO}">
 
-                    <!-- Email -->
                     <div class="mb-3">
+                        <div th:if="${loginError}" class="alert alert-danger text-center">
+                            Invalid username or password.
+                        </div>
                         <label class="form-label">Username</label>
                         <input type="text" class="form-control" th:field="*{username}" required>
                         <small class="text-danger" th:if="${#fields.hasErrors('username')}"
                                th:errors="*{username}"></small>
                     </div>
-                    <!-- Password -->
+
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" th:field="*{password}" required>
                     </div>
 
 
-                    <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <div th:replace="~{commons :: footer}"></div>
 <div th:replace="~{commons :: scripts}"></div>
+
 </body>
 </html>

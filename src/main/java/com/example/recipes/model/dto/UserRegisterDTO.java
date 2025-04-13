@@ -1,32 +1,39 @@
 package com.example.recipes.model.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.example.recipes.validation.annotation.UniqueEmail;
+import com.example.recipes.validation.annotation.UniqueUsername;
+import jakarta.validation.constraints.*;
 
 public class UserRegisterDTO {
 
-    //todo validate!
-
     @NotBlank
+    @UniqueUsername(message = "This username is already taken!")
+    @Size(min =  5, max = 20)
     private String username;
 
     @Email
+    @UniqueEmail(message = "Email is already in use!")
     private String email;
 
     @NotBlank
+    @Size(min =  6, max = 20)
     private String password;
 
+    @NotBlank
+    @Size(min =  6, max = 20)
     private String confirmPassword;
 
     @NotBlank
+    @Size(min =  5, max = 20)
     private String firstName;
 
     @NotBlank
+    @Size(min =  5, max = 20)
     private String lastName;
 
     @NotNull
+    @Min(10)
+    @Max(90)
     private Integer age;
 
     public UserRegisterDTO() {
