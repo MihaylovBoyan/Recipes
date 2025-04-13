@@ -3,6 +3,7 @@ package com.example.recipes.model;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
@@ -16,7 +17,7 @@ public class Comment {
     private boolean approved;
 
     @Column(nullable = false)
-    private Instant created;
+    private LocalDateTime created;
 
     @Column(name = "text_content", nullable = false)
     private String textContent;
@@ -48,11 +49,11 @@ public class Comment {
         return this;
     }
 
-    public Instant getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public Comment setCreated(Instant created) {
+    public Comment setCreated(LocalDateTime created) {
         this.created = created;
         return this;
     }

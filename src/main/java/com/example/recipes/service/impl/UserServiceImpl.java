@@ -100,6 +100,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public Long findIdByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        return user.getId();
+    }
+
 
     private User mapToUser(UserRegisterDTO userRegisterDTO) {
 

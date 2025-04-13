@@ -19,4 +19,6 @@ public interface UserService {
     UserDetailsDTO showUserDetailsByUsername(String username);
 
     void saveProfilePicture(String username, MultipartFile image) throws IOException;
+
+    Long findIdByUsername(String username);
 }

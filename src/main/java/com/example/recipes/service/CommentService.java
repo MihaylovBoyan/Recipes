@@ -1,15 +1,16 @@
 package com.example.recipes.service;
 
 import com.example.recipes.model.Comment;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 public interface CommentService {
     List<Comment> getCommentsByRecipeId(Long recipeId);
 
-    Comment addComment(Long recipeId, Comment comment);
+    void addComment(Long id, String text, UserDetails userDetails);
 
-    Comment updateComment(Long commentId, Comment comment);
+    void approve(Long id);
 
-    void deleteComment(Long commentId);
+    void delete(Long id);
 }

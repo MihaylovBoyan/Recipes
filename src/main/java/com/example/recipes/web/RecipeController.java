@@ -1,10 +1,10 @@
 package com.example.recipes.web;
 
 import com.example.recipes.model.CategoryEnum;
-import com.example.recipes.model.Recipe;
 import com.example.recipes.model.RecipeUserDetails;
 import com.example.recipes.model.dto.RecipeDTO;
 import com.example.recipes.model.dto.RecipeDetailsDTO;
+import com.example.recipes.service.CommentService;
 import com.example.recipes.service.RecipeService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,9 +20,11 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final CommentService commentService;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, CommentService commentService) {
         this.recipeService = recipeService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/recipes/add")
@@ -56,6 +58,8 @@ public class RecipeController {
     @GetMapping("/recipe/details/{id}")
     private String recipeDetails(@PathVariable("id") Long id, Model model) {
         model.addAttribute("recipe", recipeService.findById(id));
+        model.addAttribute("comments", commentService.getCommentsByRecipeId(id));
+
         return "details";
     }
 

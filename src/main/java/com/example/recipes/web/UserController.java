@@ -72,7 +72,8 @@ public class UserController {
     public String uploadProfilePicture(@RequestParam("image") MultipartFile image,
                                        @AuthenticationPrincipal UserDetails userDetails) throws IOException {
         userService.saveProfilePicture(userDetails.getUsername(), image);
-        return "redirect:/users/profile";
+        Long id = userService.findIdByUsername(userDetails.getUsername());
+        return "redirect:/users/profile/" + id;
     }
 
 

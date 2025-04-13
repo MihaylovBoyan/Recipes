@@ -5,9 +5,10 @@ import com.example.recipes.model.Recipe;
 import com.example.recipes.repository.CommentRepository;
 import com.example.recipes.repository.RecipeRepository;
 import com.example.recipes.service.CommentService;
+import com.example.recipes.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,37 +17,41 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final RecipeRepository recipeRepository;
+    private final UserService userService;
 
-    public CommentServiceImpl(CommentRepository commentRepository, RecipeRepository recipeRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, RecipeRepository recipeRepository, UserService userService) {
         this.commentRepository = commentRepository;
         this.recipeRepository = recipeRepository;
+        this.userService = userService;
     }
 
     public List<Comment> getCommentsByRecipeId(Long recipeId) {
         return commentRepository.findByRecipeId(recipeId);
     }
 
-    public Comment addComment(Long recipeId, Comment comment) {
-        Recipe recipe = recipeRepository.findById(recipeId)
-                .orElseThrow(() -> new IllegalArgumentException("Recipe not found"));
-        comment.setRecipe(recipe);
-        comment.setCreated(Instant.now());
-        comment.setApproved(false); // Default to not approved
-        return commentRepository.save(comment);
+    @Override
+    public void addComment(Long id, String text, UserDetails userDetails) {
+
+        Comment comment = new Comment();
+        comment.setCreated(LocalDateTime.now())
+                .setTextContent(text)
+                .setRecipe(recipeRepository.findById(id).orElseThrow())
+                .setAuthor(userService.findByUsername(userDetails.getUsername()))
+                .setApproved(false);
+
+        commentRepository.save(comment);
     }
 
-    public Comment updateComment(Long commentId, Comment updatedComment) {
-        Comment existingComment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
-        existingComment.setTextContent(updatedComment.getTextContent());
-        return commentRepository.save(existingComment);
+    @Override
+    public void approve(Long id) {
+        Comment comment = commentRepository.findById(id).orElseThrow();
+        comment.setApproved(true);
+        commentRepository.save(comment);
     }
 
-    public void deleteComment(Long commentId) {
-        if (!commentRepository.existsById(commentId)) {
-            throw new IllegalArgumentException("Comment not found");
-        }
-        commentRepository.deleteById(commentId);
+    @Override
+    public void delete(Long id) {
+        commentRepository.deleteById(id);
     }
 
 }

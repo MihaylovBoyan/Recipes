@@ -29,17 +29,6 @@ public class RecipesUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
     }
 
-//    private static UserDetails map(User user) {
-//
-//        return org.springframework.security.core.userdetails.User
-//                .withUsername(user.getUsername())
-//                .password(user.getPassword())
-//                .authorities(List.of())
-//                .disabled(false)
-//                .build();
-//
-//    }
-
     private static UserDetails map(User user) {
         return new RecipeUserDetails(
                 user.getUsername(),
