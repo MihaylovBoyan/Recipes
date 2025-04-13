@@ -43,7 +43,6 @@ public class RecipeController {
                               @AuthenticationPrincipal RecipeUserDetails currentUser) {
 
         if (bindingResult.hasErrors()) {
-
             redirectAttributes.addFlashAttribute("recipe", recipeDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipe", bindingResult);
             return "redirect:/recipes/add";
@@ -56,10 +55,7 @@ public class RecipeController {
 
     @GetMapping("/recipe/details/{id}")
     private String recipeDetails(@PathVariable("id") Long id, Model model) {
-        RecipeDetailsDTO byId = recipeService.findById(id);
-        System.out.println(byId.getId());
         model.addAttribute("recipe", recipeService.findById(id));
-
         return "details";
     }
 
@@ -75,7 +71,6 @@ public class RecipeController {
 
     @PatchMapping("/recipe/update/{id}")
     public String update(@PathVariable Long id, @ModelAttribute("recipe") RecipeDTO recipeDTO) {
-
         recipeService.updateById(id, recipeDTO);
 
         return "redirect:/";

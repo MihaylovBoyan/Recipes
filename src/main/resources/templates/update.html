@@ -10,11 +10,10 @@
     <h2>Amend Recipe</h2>
 
     <form th:action="@{/recipe/update/{id}(id=*{id})}" th:object="${recipe}" th:method="PATCH">
-          enctype="multipart/form-data" class="recipe-form">
+
 
         <label for="title">Recipe Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">
-
 
         <label th:for="category">Category:</label>
         <select id="category" name="category" class="form-control">
@@ -24,14 +23,9 @@
                     th:text="${cat}"></option>
         </select>
 
-
-        <!-- Display all errors for 'title' -->
-        <!--      <small th:errors="*{title}" class="invalid-feedback text-danger"></small>-->
-
-
         <label th:for="description">Description:</label>
         <input type="text" id="description" name="description" th:field="*{description}"
-                  th:errorclass="'is-invalid alert-danger'" required/>
+               th:errorclass="'is-invalid alert-danger'" required/>
         <small class="invalid-feedback text-danger">Error 2</small>
 
 
@@ -41,16 +35,11 @@
         <label for="imageUrl">Image URL:</label>
         <input type="text" id="imageUrl" name="imageUrl" required th:field="*{imageUrl}"/>
 
-        <!--    <label for="image">Recipe Image:</label>-->
-        <!--    <input type="file" id="image" name="image" accept="image/*" required>-->
-
         <button type="submit" class="submit-btn">Update Recipe</button>
     </form>
 </div>
 
-<!-- Footer -->
-
-
 </body>
 <div th:replace="~{commons :: footer}"></div>
+<div th:replace="~{commons :: scripts}"></div>
 </html>

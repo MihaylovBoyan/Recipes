@@ -4,11 +4,16 @@ import com.example.recipes.model.dto.UserDetailsDTO;
 import com.example.recipes.model.dto.UserRegisterDTO;
 import com.example.recipes.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/users")
@@ -22,15 +27,15 @@ public class UserController {
 
 
     @GetMapping("/register")
-    public String registerUser(){
+    public String registerUser() {
 
         return "register";
     }
 
 
     @PostMapping("/register")
-    public String doRegisterUser(@Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
+    public String doRegisterUser(@Valid UserRegisterDTO userRegisterDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("userRegisterDTO", userRegisterDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
@@ -44,23 +49,31 @@ public class UserController {
     }
 
     @ModelAttribute("userRegisterDTO")
-    public UserRegisterDTO userRegisterDTO(){
+    public UserRegisterDTO userRegisterDTO() {
         return new UserRegisterDTO();
     }
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
 
     @GetMapping("/profile/{id}")
-    public String details(@PathVariable Long id, Model model){
+    public String details(@PathVariable Long id, Model model) {
 
-      model.addAttribute("userDetailsDTO", userService.showUserDetailsById(id));
+        model.addAttribute("userDetailsDTO", userService.showUserDetailsById(id));
 
         return "profile";
     }
+
+    @PostMapping("/profile-picture")
+    public String uploadProfilePicture(@RequestParam("image") MultipartFile image,
+                                       @AuthenticationPrincipal UserDetails userDetails) throws IOException {
+        userService.saveProfilePicture(userDetails.getUsername(), image);
+        return "redirect:/users/profile";
+    }
+
 
 }

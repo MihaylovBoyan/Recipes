@@ -47,11 +47,10 @@ body {
     color: #ff5733 !important;
 }
 
-/*profile*/
 
 .profile-icon {
     width: 28px;
-    height: 28px;
+    height: 26px;
     border-radius: 50%;
     object-fit: cover;
     transition: transform 0.2s ease;
@@ -75,7 +74,6 @@ body {
 }
 
 
-/* Dark Mode Button */
 #darkModeToggle {
     border-radius: 12px;
     font-size: 1.1rem;
@@ -91,7 +89,6 @@ body {
     color: #222;
 }
 
-/* Search Input */
 .navbar .form-control {
     border-radius: 30px;
     padding-left: 16px;
@@ -105,7 +102,6 @@ body {
     border-color: #ff5733;
 }
 
-/* Mobile spacing fix */
 @media (max-width: 992px) {
     .navbar-nav .nav-link {
         margin-bottom: 8px;
@@ -122,9 +118,6 @@ body {
     border-radius: 20px;
     min-width: 180px;
 }
-
-
-/*about*/
 
 section {
     padding: 20px;
@@ -149,6 +142,16 @@ h1, h2, h3 {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.btn {
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn i {
+    font-size: 1rem;
 }
 
 .btn {
@@ -227,56 +230,30 @@ h1, h2, h3 {
     background-color: #e64a19;
 }
 
+/*DARK MODE*/
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
-    font-size: 14px;
-    margin-top: auto;
+:root {
+    --primary-color: #ff5733;
+    --primary-hover: #e64a19;
+    --dark-bg: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-border: #333;
+    --dark-text: #eee;
+    --dark-muted: #aaa;
 }
 
-body.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-.dark-mode .navbar {
-    background-color: #444;
-    border-bottom: 3px solid #555;
-}
-
-.dark-mode .navbar-brand {
-    color: #fff;
-}
-
-.dark-mode .navbar-nav .nav-link {
-    color: #bbb;
-}
-
-.dark-mode .navbar-nav .nav-link:hover {
-    color: #ff5733;
-}
-
-.dark-mode .navbar input {
-    border: 2px solid #555;
-    background-color: #444;
-    color: #fff;
-}
-
-.dark-mode .container h2 {
-    color: #fff;
-    border-bottom: 3px solid #ff5733;
-}
+/* === DARK MODE === */
 
 .dark-mode .card {
-    background-color: #444;
-    border: 1px solid #555;
+    background-color: #1f1f1f;
+    border: 1px solid #333;
+    color: #eee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .dark-mode .card-body {
-    background-color: #555;
+    background-color: transparent;
+    color: #ccc;
 }
 
 .dark-mode .card-title {
@@ -284,26 +261,43 @@ body.dark-mode {
 }
 
 .dark-mode .card-text {
-    color: #ddd;
+    color: #aaa;
 }
 
-.dark-mode .btn-primary {
-    background-color: #ff5733;
-    border: none;
+.dark-mode .card-img-top {
+    background-color: #333;
+    object-fit: cover;
+    height: 220px;
 }
 
-.dark-mode .btn-primary:hover {
-    background-color: #e64a19;
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
 }
 
-.dark-mode .footer {
+.card-img-top:empty::before {
+    content: "No Image";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
     background-color: #222;
-    color: #ddd;
+    height: 100%;
+    width: 100%;
+    font-size: 1.2rem;
 }
 
-#darkModeToggle{
-    margin: 0;
-    padding: 0;
+.dark-mode .navbar {
+    background-color: #181818;
+    border-bottom: 1px solid #333;
+    color: white;
+}
+
+.dark-mode input[type="search"] {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
 }
 
 .container {
@@ -322,7 +316,6 @@ h2 {
     color: #333;
 }
 
-/* Form Labels */
 label {
     font-size: 16px;
     font-weight: 600;
@@ -332,7 +325,6 @@ label {
     margin-bottom: 5px;
 }
 
-/* Form Inputs and Textareas */
 input[type="text"], input[type="url"], textarea {
     width: 100%;
     padding: 12px;
@@ -349,13 +341,11 @@ input[type="text"]:focus, input[type="url"]:focus, textarea:focus {
     outline: none;
 }
 
-/* Textarea Specific */
 textarea {
     height: 120px;
     resize: vertical;
 }
 
-/* Invalid Input Styling */
 .is-invalid {
     border-color: #e74c3c;
     background-color: #f8d7da;
@@ -365,7 +355,6 @@ textarea {
     border-color: #e74c3c;
 }
 
-/* Error Messages */
 .invalid-feedback {
     display: block;
     font-size: 14px;
@@ -394,28 +383,22 @@ textarea {
     background-color: #d43f00;
 }
 
-/* Spacing between form elements */
+
 .recipe-form {
     margin-top: 20px;
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 20px;
     background-color: #333;
     color: #fff;
     font-size: 14px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+    margin-top: auto;
 }
 
-footer p {
-    margin: 0;
-}
 
-/* Responsive Styling */
+
 @media (max-width: 768px) {
     .container {
         padding: 20px 10px;

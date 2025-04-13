@@ -18,6 +18,8 @@ public class RecipeDetailsDTO {
 
     private String instructions;
 
+    private String createdByUsername;
+
     public RecipeDetailsDTO() {
     }
 
@@ -82,6 +84,15 @@ public class RecipeDetailsDTO {
 
     public RecipeDetailsDTO setInstructions(String instructions) {
         this.instructions = instructions;
+        return this;
+    }
+
+    public String getCreatedByUsername() {
+        return createdByUsername;
+    }
+
+    public RecipeDetailsDTO setCreatedByUsername(String createdByUsername) {
+        this.createdByUsername = createdByUsername;
         return this;
     }
 }

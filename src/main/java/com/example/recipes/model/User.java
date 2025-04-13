@@ -33,6 +33,9 @@ public class User {
     @Column
     private String lastName;
 
+    @Column
+    private String profilePictureUrl;
+
     @OneToMany(mappedBy = "createdBy")
     private List<Recipe> recipes;
 
@@ -122,6 +125,15 @@ public class User {
 
     public User setRoles(List<Role> roles) {
         this.roles = roles;
+        return this;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public User setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
         return this;
     }
 }

@@ -50,6 +50,7 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeDetailsDTO recipeDetailsDTO = modelMapper.map(recipe, RecipeDetailsDTO.class);
         recipeDetailsDTO.setCategory(recipe.getCategory().getName().name());
         recipeDetailsDTO.setImageUrl(recipe.getImageUrl());
+        recipeDetailsDTO.setCreatedByUsername(recipe.getCreatedBy().getUsername());
         return recipeDetailsDTO;
     }
 

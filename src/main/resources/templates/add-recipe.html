@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{commons :: head}"></head>
-<body>
 
-<!-- Navbar -->
+<body class="d-flex flex-column min-vh-100">
+
 <div th:replace="~{commons :: navbar}"></div>
 
-<div class="container">
+<main class="container flex-grow-1 py-4">
     <h2>Add a New Recipe</h2>
 
     <form th:action="@{/recipes/add}" th:method="post" th:object="${recipe}"
@@ -15,18 +15,15 @@
         <label for="title">Recipe Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid" max="10">
 
-
         <label th:for="category">Category:</label>
         <select id="category" th:field="*{category}" class="form-control">
             <option value="" disabled selected>Select category</option>
-            <option th:each="cat : ${categories}"
-                    th:value="${cat}"
-                    th:text="${cat}"></option>
+            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"></option>
         </select>
 
         <label th:for="description">Description:</label>
-        <input type="text" id="description" name="description" th:field="*{description}"
-                  th:errorclass="'is-invalid alert-danger'" required></textarea>
+        <input type="text" id="description" name="description"
+               th:field="*{description}" th:errorclass="'is-invalid alert-danger'" required>
         <small class="invalid-feedback text-danger">Error 2</small>
 
         <label for="ingredients">Ingredients:</label>
@@ -40,8 +37,10 @@
 
         <button type="submit" class="submit-btn">Submit Recipe</button>
     </form>
-</div>
+</main>
 
+<!-- Footer (fragment) -->
+<div th:replace="~{commons :: footer}"></div>
+<div th:replace="~{commons :: scripts}"></div>
 </body>
-
 </html>

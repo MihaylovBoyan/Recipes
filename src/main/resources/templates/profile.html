@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:replace="~{commons :: head}"></div>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons :: head}"></head>
 
-<!-- Navbar Fragment -->
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
 <div th:replace="~{commons :: navbar}"></div>
 
-<div class="container mt-5" th:object="${userDetailsDTO}">
+<!-- Profile Content -->
+<main class="container flex-grow-1 py-4" th:object="${userDetailsDTO}">
     <div class="card shadow p-4 rounded-4">
         <div class="row align-items-center">
+            <form th:action="@{/users/profile-picture}" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" class="form-control mb-2" required>
+                <button type="submit" class="btn btn-outline-primary btn-sm">Upload New Picture</button>
+                <p class="text-danger" th:if="${fileError}" th:text="${fileError}"></p>
+            </form>
             <div class="col-md-3 text-center">
-                <img src="/images/user-icon.svg" class="img-fluid rounded-circle mb-3" style="width: 120px;" alt="User Icon">
-                <h4 >Full Name</h4>
-                <p class="text-muted" >@username</p>
+                <img th:src="${userDetailsDTO.profilePictureUrl != null} ? ${userDetailsDTO.profilePictureUrl} : '/images/user-icon.svg'"
+                     class="img-fluid rounded-circle mb-3" style="width: 200px;" alt="Profile Picture">
+                <h4 th:text="*{firstName + ' ' + lastName}">Full Name</h4>
+                <p class="text-muted" th:text="'@' + *{username}">@username</p>
             </div>
 
             <div class="col-md-9">
                 <h5 class="mb-3">Profile Details</h5>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Email:</strong> <span th:text="*{email}">user@email.com</span></li>
-                    <li class="list-group-item"><strong>Age:</strong> <span th:text="*{age}">25</span></li>
-                    <li class="list-group-item"><strong>Roles:</strong>
-                        <span  class="badge bg-secondary me-1">ROLE_USER</span>
+                    <li class="list-group-item">
+                        <strong>Email:</strong>
+                        <span th:text="*{email}">user@email.com</span>
                     </li>
                     <li class="list-group-item">
+                        <strong>Age:</strong>
+                        <span th:text="*{age}">25</span>
+                    </li>
+
+                    <li class="list-group-item">
                         <strong>Recipes Created:</strong>
-                        <span >0</span>
+                        <span th:text="*{recipes.size()}">0</span>
                     </li>
                 </ul>
 
@@ -34,23 +46,26 @@
         </div>
     </div>
 
-    <!-- My Recipes -->
     <div class="mt-5">
         <h3 class="mb-3">My Recipes</h3>
-        <div class="row g-3" >
-            <div class="col-md-4">
+        <div class="row g-3">
+            <div class="col-md-4" th:each="recipe : *{recipes}">
                 <div class="card h-100 shadow-sm">
-<!--                    <img src class="card-img-top" th:alt=>-->
+                    <img th:src="${recipe.imageUrl}" class="card-img-top" alt="Recipe Image">
                     <div class="card-body text-center">
-                        <h5 class="card-title" >Recipe Name</h5>
-<!--                        <a th:href="@{'/recipes/' + ${recipe.id}}" class="btn btn-outline-primary">View</a>-->
+                        <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
+                        <a th:href="@{'/recipe/details/' + ${recipe.id}}" class="btn btn-outline-primary">View</a>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <p class="text-muted"">You haven’t added any recipes yet.</p>-->
+
+        <p class="text-muted mt-3" th:if="*{recipes.isEmpty()}">You haven’t added any recipes yet.</p>
     </div>
-</div>
+</main>
+
+<div th:replace="~{commons :: footer}"></div>
+<div th:replace="~{commons :: scripts}"></div>
 
 </body>
 </html>

@@ -13,10 +13,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 
 @Service
@@ -27,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
     private final RoleRepository roleRepository;
+    private User user;
 
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleService roleService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
@@ -63,11 +71,33 @@ public class UserServiceImpl implements UserService {
     //todo finish it!
     public UserDetailsDTO showUserDetailsByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow();
-       return new UserDetailsDTO()
-               .setAge(user.getAge())
-               .setEmail(user.getEmail())
-               .setUsername(user.getUsername())
-               .setId(user.getId());
+        return new UserDetailsDTO()
+                .setAge(user.getAge())
+                .setEmail(user.getEmail())
+                .setUsername(user.getUsername())
+                .setId(user.getId());
+    }
+
+    @Override
+    public void saveProfilePicture(String username, MultipartFile image) throws IOException {
+
+        User user = userRepository.findByUsername(username).orElseThrow();
+        String filename = UUID.randomUUID() + "-" + image.getOriginalFilename();
+        Path uploadPath = Paths.get("uploads/profile-pics");
+
+        try {
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            Path filePath = uploadPath.resolve(filename);
+            Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            user.setProfilePictureUrl("/uploads/profile-pics/" + filename);
+            userRepository.save(user);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+        }
+
     }
 
 

@@ -20,6 +20,8 @@ public class UserDetailsDTO {
 
     private String email;
 
+    private String profilePictureUrl;
+
     private List<Recipe> recipes;
 
     public UserDetailsDTO() {
@@ -94,6 +96,15 @@ public class UserDetailsDTO {
 
     public UserDetailsDTO setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public UserDetailsDTO setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
         return this;
     }
 }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{commons :: head}"></head>
-<body>
 
-<!-- Navbar -->
+<body class="d-flex flex-column min-vh-100">
+
 <div th:replace="~{commons :: navbar}"></div>
-<!-- Latest Recipes Section -->
-<div class="container mt-4">
+
+<main class="flex-grow-1 container mt-4">
     <h2>Latest Recipes</h2>
     <div class="row">
         <div class="col-md-4" th:each="recipe : ${recipes}">
@@ -20,25 +20,63 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Dark Mode Toggle Script
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDarkMode = body.classList.contains('dark-mode');
-        darkModeToggle.textContent = isDarkMode ? '🌞' : '🌙'; // Change emoji on toggle
-    });
-</script>
-
-</body>
+</main>
 
 <div th:replace="~{commons :: footer}"></div>
 
+<div th:replace="~{commons :: scripts}"></div>
+<div th:replace="~{commons :: scripts}"></div>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="~{commons :: head}"></head>-->
+
+<!--<body class="d-flex flex-column min-vh-100"> &lt;!&ndash; Key layout fix &ndash;&gt;-->
+
+<!--&lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<div th:replace="~{commons :: navbar}"></div>-->
+
+<!--&lt;!&ndash; Page Content &ndash;&gt;-->
+<!--<main class="flex-grow-1 container mt-4"> &lt;!&ndash; This grows to fill space &ndash;&gt;-->
+<!--    <h2>Latest Recipes</h2>-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-4" th:each="recipe : ${recipes}">-->
+<!--            <div class="card">-->
+<!--                <img th:src="${recipe.imageUrl}" class="card-img-top" alt="Recipe Image">-->
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title" th:text="${recipe.title}"></h5>-->
+<!--                    <p class="card-text" th:text="${recipe.description}"></p>-->
+<!--                    <a th:href="@{/recipe/details/{id}(id=${recipe.id})}" class="btn btn-primary">View Recipe</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<div th:replace="~{commons :: footer}"></div>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script>-->
+<!--    const darkModeToggle = document.getElementById('darkModeToggle');-->
+<!--    const body = document.body;-->
+
+<!--    darkModeToggle?.addEventListener('click', () => {-->
+<!--        body.classList.toggle('dark-mode');-->
+<!--        darkModeToggle.textContent = body.classList.contains('dark-mode') ? '🌞' : '🌙';-->
+<!--    });-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
 
